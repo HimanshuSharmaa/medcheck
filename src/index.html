@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+</head>
+<body style="background-color:bisque ;" >
+    
+
+    <h1 style="text-align: center;" >Medicine use</h1>
+
+
+    <div class="maincontainer" style="display: flex; justify-content: center; flex-direction: column; ">
+
+
+        <input style="margin: 10px; width: 300px; align-self: center; padding: 10px; border-radius: 20px; border-style: none;"  type="text" id="parameterInput" placeholder="Enter a Medicine name" >
+<br>
+        <button style="margin: 10px; width: 150px; align-self: center; height: 30px; border-radius: 10px; border-style: none; background-color: skyblue;"  onclick="executeFunction()">Search</button>
+
+
+    </div>
+    
+        <br><br>
+        <br><br>
+        <div style="background-color: white; padding: 10px; border-radius: 10px; font-size: 18px; max-width: 500px; margin: auto; " id="output1">english</div>
+        <br>
+        <hr>
+        <br>
+        <div style="background-color: white; padding: 10px; border-radius: 10px; font-size: 18px; max-width: 500px; margin: auto;  " id="output2">hindi</div>
+
+
+   
+
+
+   
+    <script>
+
+
+async function executeFunction() {
+
+    try{
+
+        document.getElementById('output1').innerHTML = "Loading in english....";
+        document.getElementById('output2').innerHTML = "Loading in Hindi....";
+        
+
+        const parameter =await document.getElementById('parameterInput').value
+        const response = await fetch(`/getStringData/${parameter}`)
+        const data = await response.json();
+
+        document.getElementById('output1').innerHTML = data.english;
+        document.getElementById('output2').innerHTML = data.hindi;
+
+        const texti =  await document.getElementById('output1')
+
+       
+
+
+    }catch(err){
+
+        console.log(err.message)
+
+    }
+
+        }
+
+
+    </script>
+</body>
+</html>
